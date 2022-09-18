@@ -18,14 +18,8 @@
 
 <script>
 import AppNavbar from "./components/AppNavbar.vue";
-import { usersCollection } from "@/firebase";
 
-export default {
-  created() {
-    usersCollection
-      .get()
-      .then((res) => res.forEach((doc) => console.log(doc.data())));
-  },
+export default {  
   name: "App",
   components: {
     AppNavbar,
