@@ -40,10 +40,9 @@ export default {
         const user = firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password);
-        console.log(user);
         this.$router.replace({ path: "dashboard" });
       } catch (err) {
-        console.log(err);
+        alert(err)
       }
     },
   },

@@ -10,8 +10,7 @@ Vue.config.productionTip = false
 
 let app;
 
-auth.onAuthStateChanged(user => {
-  console.log(user)
+auth.onAuthStateChanged(() => {
   if (!app) {
     app = new Vue({
       vuetify,
