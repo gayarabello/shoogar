@@ -8,7 +8,7 @@
       >
         <v-col cols="11" sm="6" md="6" class="text-center mb-6">
           <h1 class="white--text mx-auto mb-6" style="font-size: 2.2rem">
-            Quit guilty and achieve your goals by eating up to 1 treat a day
+            Quit guilt and achieve your goals by eating up to 1 treat a day
           </h1>
           <v-btn to="/signup" depressed rounded>Start today</v-btn>
         </v-col>

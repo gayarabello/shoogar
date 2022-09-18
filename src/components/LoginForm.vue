@@ -26,7 +26,7 @@
   </form>
 </template>
 <script>
-import firebase from "firebase/app";
+import { signIn } from "@/firebase";
 export default {
   data() {
     return {
@@ -37,9 +37,7 @@ export default {
   methods: {
     async login() {
       try {
-        const user = firebase
-          .auth()
-          .signInWithEmailAndPassword(this.email, this.password);
+         await signIn(this.email, this.password)
         this.$router.replace({ path: "dashboard" });
       } catch (err) {
         alert(err)

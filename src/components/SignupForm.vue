@@ -37,8 +37,7 @@
   </form>
 </template>
 <script>
-import firebase from "firebase/app";
-import { db } from "@/firebase";
+import { signIn, signUp } from "@/firebase";
 
 export default {
   data() {
@@ -49,28 +48,14 @@ export default {
     };
   },
   methods: {
-    createUser() {
-      db.collection("users")
-        .doc()
-        .set({
-          name: this.email,
-          average_expendure: this.candies,
-        })
-        .then(function() {
-          console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-          console.error("Error writing document: ", error);
-        });
-    },
-
     async pressed() {
-      this.createUser();
+      this.createUser({
+          id: this.email,
+          average_expendure: this.candies,
+        });
       try {
-        const user = firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.email, this.password);
-        console.log(user);
+        await signUp(this.email, this.password);
+        await signIn(this.email, this.password);
         this.$router.replace({ path: "dashboard" });
       } catch (err) {
         console.log(err);
