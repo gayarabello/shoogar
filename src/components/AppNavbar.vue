@@ -7,7 +7,8 @@
       <div>
         <v-row no-gutters>
           <v-btn to="/login" dark text rounded>Login</v-btn>
-          <v-btn to="/signup" dark text rounded>Signup</v-btn>
+          <v-btn v-if="!isLogged" to="/signup" dark text rounded>Signup</v-btn>
+          <v-btn v-else @click="signOut()">Logout</v-btn>
         </v-row>
       </div>
     </v-row>
@@ -15,25 +16,30 @@
 </template>
 
 <script>
+import { singOut, getIsAuthenticated } from "@/firebase";
+
 export default {
   name: "AppNavbar",
+  data(){
+    return {
+      isLogged: false,
+    }
+  },
+  async mounted(){
+    this.isLogged =  await getIsAuthenticated();        
+  },
+  methods: {
+    async signOut() {
+      try {
+        await singOut()
+        this.isLogged =  await getIsAuthenticated();        
+        this.$router.replace({ path: "/" });
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  },
+
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
